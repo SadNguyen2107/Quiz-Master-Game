@@ -69,6 +69,9 @@ public class Quiz : MonoBehaviour, IUserState, IQuestion
             // Delete the Answered Question 
             // DeleteQuestionAt(currentQuestionIndex);
 
+            // Reset all the Buttons to the Default State
+            ResetAllAnswerButtonsToDefaultState();
+
             // Choose A Random Question in questions list
             ChooseRandomQuestion();
             if (UserState == UserState.FinishedAllQuestions)
@@ -82,9 +85,6 @@ public class Quiz : MonoBehaviour, IUserState, IQuestion
 
             // Wait For User to Answer
             UserState = UserState.AnsweringPhase;
-
-            // Reset all the Buttons to the Default State
-            ResetAllAnswerButtonsToDefaultState();
         }
     }
 
@@ -124,11 +124,13 @@ public class Quiz : MonoBehaviour, IUserState, IQuestion
     void ResetAllAnswerButtonsToDefaultState()
     {
         // Reset all the Buttons to the Default State
-        foreach (Button button in answerButtons)
+        for (int button_index = 0; button_index < answerButtons.Length; button_index++)
         {
-            button.interactable = true;
-            button.image.sprite = defaultAnswerButtonSprite;
+            answerButtons[button_index].interactable = true;
+            answerButtons[button_index].image.sprite = defaultAnswerButtonSprite;
+            answerButtons[button_index].image.color = new Color(255,255,255, 255);
         }
+       
     }
 
     /// <summary>
